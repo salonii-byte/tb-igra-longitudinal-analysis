@@ -1,5 +1,7 @@
 # 🫁 Longitudinal IGRA Dynamics & Risk Stratification for Tuberculosis Progression
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/salonii-byte/tb-igra-longitudinal-analysis/blob/main/tb_project.ipynb)
+
 > **A 24-month cohort study analyzing IGRA diagnostic trajectories, biomarker patterns, and comorbidity-driven risk factors to identify individuals most likely to progress from Latent to Active Tuberculosis.**
 
 ---
@@ -134,6 +136,16 @@ See: `reports/findings_summary.md`
 
 ---
 
+## 📊 Exploratory Visualizations
+
+### 1. BMI Category Distribution
+![BMI Distribution](visuals/bmi_distribution.png)
+
+### 2. Age vs. IFN-Gamma Response Delta by BMI Category
+![Age vs IFN Delta](visuals/age_vs_ifn_gamma_delta.png)
+
+---
+
 ## 📊 Tableau Dashboard
 
 **Dashboard Title:** *TB Longitudinal Outcome & Cohort Risk Analysis*
@@ -146,7 +158,7 @@ See: `reports/findings_summary.md`
 | Visual 3 | Stacked Bar — Outcome distribution by comorbidity combination |
 | Visual 4 | Grouped Bar — Mean IFN-GAMMA-UNS vs IFN-GAMMA-C+E by Outcome |
 
-> Add Tableau Public link here after publishing your dashboard.
+> See: [`reports/tableau_dashboard_guide.md`](reports/tableau_dashboard_guide.md) for full dashboard specifications.
 
 ---
 
@@ -156,23 +168,27 @@ See: `reports/findings_summary.md`
 tb-igra-longitudinal-analysis/
 │
 ├── README.md                         ← Project overview (this file)
+├── tb_project.ipynb                  ← Colab interactive analysis with outputs & badge
 │
 ├── data/
-│   ├── raw/                          ← Original dataset (CSV)
-│   └── processed/                    ← Cleaned & feature-engineered dataset
+│   ├── raw/                          ← Original dataset (case_study.csv)
+│   └── processed/                    ← Feature-engineered dataset (processed_tb_cohort_analysis.csv)
 │
 ├── sql/
 │   └── risk_stratification.sql       ← BigQuery SQL: cleaning + risk cross-tabulation
 │
 ├── notebooks/
 │   ├── 01_data_cleaning_eda.ipynb    ← Python EDA: cleaning, BMI, biomarker analysis
-│   └── 02_colab_analysis.ipynb       ← Cohort exploration, feature engineering, visualizations
+│   ├── 02_colab_analysis.ipynb       ← Pre-rendered tables & cohort aggregations
+│   └── tb_project.ipynb              ← Colab interactive analysis
 │
 ├── visuals/
-│   └── dashboard_preview.png         ← Tableau dashboard screenshot
+│   ├── bmi_distribution.png          ← WHO BMI category bar chart
+│   └── age_vs_ifn_gamma_delta.png    ← Age vs immune response delta scatterplot
 │
 └── reports/
-    └── findings_summary.md           ← Key findings + public health recommendations
+    ├── findings_summary.md           ← Key clinical findings + recommendations
+    └── tableau_dashboard_guide.md    ← Step-by-step Tableau dashboard blueprint
 ```
 
 ---
