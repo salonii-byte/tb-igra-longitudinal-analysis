@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints
+.env
+venv/
+.venv/
+
+# Data files (add manually to GitHub if needed)
+data/raw/*.csv
+data/processed/*.csv
+
+# macOS
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
