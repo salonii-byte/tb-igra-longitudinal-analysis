@@ -1,6 +1,8 @@
 # 📊 Tableau Dashboard Blueprint: TB IGRA Longitudinal Analysis
 
-This guide provides step-by-step instructions for building the interactive 4-view clinical dashboard in **Tableau Desktop** or **Tableau Public** using `data/processed/processed_tb_cohort_analysis.csv`.
+> 🔗 **Live Dashboard:** [View on Tableau Public](https://public.tableau.com/app/profile/saloni.prasad3289/viz/TB_17851023282600/Dashboard1)
+
+This guide provides step-by-step instructions for building and configuring the clinical dashboard in **Tableau Desktop** or **Tableau Public** using `data/processed/processed_tb_cohort_analysis.csv`.
 
 ---
 

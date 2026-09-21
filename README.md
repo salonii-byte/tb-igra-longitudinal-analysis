@@ -1,6 +1,7 @@
 # 🫁 Longitudinal IGRA Dynamics & Risk Stratification for Tuberculosis Progression
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/salonii-byte/tb-igra-longitudinal-analysis/blob/main/tb_project.ipynb)
+[![Tableau Public](https://img.shields.io/badge/Tableau_Public-Live_Dashboard-E97627?logo=tableau&logoColor=white)](https://public.tableau.com/app/profile/saloni.prasad3289/viz/TB_17851023282600/Dashboard1)
 
 > **A 24-month cohort study analyzing IGRA diagnostic trajectories, biomarker patterns, and comorbidity-driven risk factors to identify individuals most likely to progress from Latent to Active Tuberculosis.**
 
@@ -148,17 +149,18 @@ See: `reports/findings_summary.md`
 
 ## 📊 Tableau Dashboard
 
-**Dashboard Title:** *TB Longitudinal Outcome & Cohort Risk Analysis*
+> 🔗 **Live Dashboard on Tableau Public:** [**View Interactive Visualization**](https://public.tableau.com/app/profile/saloni.prasad3289/viz/TB_17851023282600/Dashboard1)
 
-| Panel | Visual |
-|-------|--------|
-| KPI Strip | Total Patients (149) · Active TB Cases (14) · Progressor Count (15) · Diabetic & Smoker Overlap (100%) |
-| Visual 1 | Longitudinal IGRA Status Heatmap (Rows: Outcome Group · Columns: Timepoints M0–M24) |
-| Visual 2 | Scatterplot — Age vs BMI colored by Outcome, sized by IFN-GAMMA-C+E |
-| Visual 3 | Stacked Bar — Outcome distribution by comorbidity combination |
-| Visual 4 | Grouped Bar — Mean IFN-GAMMA-UNS vs IFN-GAMMA-C+E by Outcome |
+[![Tableau Dashboard Preview](visuals/dashboard_preview.png)](https://public.tableau.com/app/profile/saloni.prasad3289/viz/TB_17851023282600/Dashboard1)
 
-> See: [`reports/tableau_dashboard_guide.md`](reports/tableau_dashboard_guide.md) for full dashboard specifications.
+*Click the image above to interact with the live dashboard on Tableau Public.*
+
+### Dashboard Highlights:
+- **Demographic & Biomarker Exploration:** Longitudinal tracking of IFN-Gamma levels and BMI correlations across 149 subjects.
+- **Risk Stratification:** Clear separation of active vs. latent trajectories and comorbidity risk mapping.
+- **Interactive Filtering:** Filter dynamically by region, clinical outcome, and timepoint.
+
+> For technical field calculations and sheet configuration blueprints, see [`reports/tableau_dashboard_guide.md`](reports/tableau_dashboard_guide.md).
 
 ---
 
