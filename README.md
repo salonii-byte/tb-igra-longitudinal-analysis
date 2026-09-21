@@ -2,6 +2,7 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/salonii-byte/tb-igra-longitudinal-analysis/blob/main/tb_project.ipynb)
 [![Tableau Public](https://img.shields.io/badge/Tableau_Public-Live_Dashboard-E97627?logo=tableau&logoColor=white)](https://public.tableau.com/app/profile/saloni.prasad3289/viz/TB_17851023282600/Dashboard1)
+[![Google Cloud BigQuery](https://img.shields.io/badge/Google_Cloud-BigQuery_Workspace-4285F4?logo=googlecloud&logoColor=white)](https://console.cloud.google.com/bigquery?project=lively-wonder-492613-e6)
 
 > **A 24-month cohort study analyzing IGRA diagnostic trajectories, biomarker patterns, and comorbidity-driven risk factors to identify individuals most likely to progress from Latent to Active Tuberculosis.**
 
@@ -13,7 +14,9 @@
 - [Dataset Schema](#-dataset-schema)
 - [Analytics Framework](#-analytics-framework)
 - [Key Findings](#-key-findings)
-- [Dashboard](#-tableau-dashboard)
+- [Exploratory Visualizations](#-exploratory-visualizations)
+- [SQL Risk Stratification Pipeline (Google BigQuery)](#-sql-risk-stratification-pipeline-google-bigquery)
+- [Tableau Dashboard](#-tableau-dashboard)
 - [Folder Structure](#-folder-structure)
 - [Tools & Technologies](#-tools--technologies)
 - [Public Health Recommendations](#-public-health-recommendations)
@@ -144,6 +147,56 @@ See: `reports/findings_summary.md`
 
 ### 2. Age vs. IFN-Gamma Response Delta by BMI Category
 ![Age vs IFN Delta](visuals/age_vs_ifn_gamma_delta.png)
+
+---
+
+## 🗄️ SQL Risk Stratification Pipeline (Google BigQuery)
+
+> ☁️ **Google Cloud BigQuery Environment:**
+> - **GCP Project ID:** `lively-wonder-492613-e6`
+> - **Dataset:** `tb_case`
+> - **Table:** `case_study`
+> - **Console Workspace:** [**Open BigQuery Query Console**](https://console.cloud.google.com/bigquery?project=lively-wonder-492613-e6&supportedpurview=project&ws=!1m12!1m5!4m3!1slively-wonder-492613-e6!2stb_case!3scase_study!23sRESOURCE_LIST!1m5!1m3!1slively-wonder-492613-e6!2sjob_AyaTRvMHx_1h12ehbaRoSYuMTAVy!3sUS!23sQUERY_RESOURCE)
+
+All queries are documented in [`sql/risk_stratification.sql`](sql/risk_stratification.sql):
+
+```sql
+WITH Cleaned_Cohort AS (
+  SELECT
+    Baseline AS baseline_id,
+    AGE,
+    UPPER(GENDER) AS gender,
+    ROUND(BMI, 2) AS bmi,
+    CASE
+      WHEN BMI < 18.5 THEN 'Underweight'
+      WHEN BMI BETWEEN 18.5 AND 24.9 THEN 'Normal'
+      WHEN BMI BETWEEN 25.0 AND 29.9 THEN 'Overweight'
+      ELSE 'Obese'
+    END AS bmi_category,
+    `Baseline IGRA ` AS Baseline_IGRA,
+    `Month24 IGRA` AS Month24_IGRA,
+    `BCG VACCINATION` AS BCG_VACCINATION,
+    SMOKING,
+    `DIABETES STATUS` AS DIABETES_STATUS,
+    `TB STATUS` AS TB_STATUS,
+    OUTCOME,
+    `IFN-GAMMA-C+E` AS IFN_GAMMA_C_E,
+    REGION
+  FROM `lively-wonder-492613-e6.tb_case.case_study`
+)
+SELECT
+  OUTCOME,
+  COUNT(baseline_id) AS total_subjects,
+  ROUND(AVG(AGE), 1) AS avg_age,
+  ROUND(AVG(bmi), 2) AS avg_bmi,
+  SUM(CASE WHEN UPPER(CAST(DIABETES_STATUS AS STRING)) IN ('YES', 'TRUE', '1') THEN 1 ELSE 0 END) AS diabetic_count,
+  SUM(CASE WHEN UPPER(CAST(SMOKING AS STRING)) IN ('YES', 'TRUE', '1') THEN 1 ELSE 0 END) AS smoker_count,
+  SUM(CASE WHEN TB_STATUS = 'Active' THEN 1 ELSE 0 END) AS active_tb_cases,
+  ROUND(AVG(IFN_GAMMA_C_E), 2) AS avg_ifn_gamma_ce
+FROM Cleaned_Cohort
+GROUP BY OUTCOME
+ORDER BY active_tb_cases DESC, total_subjects DESC;
+```
 
 ---
 

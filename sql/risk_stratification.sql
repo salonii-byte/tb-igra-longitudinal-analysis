@@ -57,8 +57,8 @@ Risk_Stratification AS (
     COUNT(baseline_id)                                          AS total_subjects,
     ROUND(AVG(AGE), 1)                                          AS avg_age,
     ROUND(AVG(bmi), 2)                                          AS avg_bmi,
-    SUM(CASE WHEN DIABETES_STATUS = TRUE THEN 1 ELSE 0 END)     AS diabetic_count,
-    SUM(CASE WHEN SMOKING        = TRUE THEN 1 ELSE 0 END)      AS smoker_count,
+    SUM(CASE WHEN UPPER(CAST(DIABETES_STATUS AS STRING)) IN ('YES', 'TRUE', '1') THEN 1 ELSE 0 END)     AS diabetic_count,
+    SUM(CASE WHEN UPPER(CAST(SMOKING AS STRING)) IN ('YES', 'TRUE', '1') THEN 1 ELSE 0 END)          AS smoker_count,
     SUM(CASE WHEN TB_STATUS      = 'Active' THEN 1 ELSE 0 END)  AS active_tb_cases,
     ROUND(AVG(IFN_GAMMA_C_E), 2)                                AS avg_ifn_gamma_ce
   FROM Cleaned_Cohort
