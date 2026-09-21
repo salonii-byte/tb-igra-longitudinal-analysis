@@ -14,8 +14,8 @@
 - [Dataset Schema](#-dataset-schema)
 - [Analytics Framework](#-analytics-framework)
 - [Key Findings](#-key-findings)
-- [Exploratory Visualizations](#-exploratory-visualizations)
 - [SQL Risk Stratification Pipeline (Google BigQuery)](#-sql-risk-stratification-pipeline-google-bigquery)
+- [Exploratory Visualizations](#-exploratory-visualizations)
 - [Tableau Dashboard](#-tableau-dashboard)
 - [Folder Structure](#-folder-structure)
 - [Tools & Technologies](#-tools--technologies)
@@ -140,16 +140,6 @@ See: `reports/findings_summary.md`
 
 ---
 
-## 📊 Exploratory Visualizations
-
-### 1. BMI Category Distribution
-![BMI Distribution](visuals/bmi_distribution.png)
-
-### 2. Age vs. IFN-Gamma Response Delta by BMI Category
-![Age vs IFN Delta](visuals/age_vs_ifn_gamma_delta.png)
-
----
-
 ## 🗄️ SQL Risk Stratification Pipeline (Google BigQuery)
 
 > ☁️ **Google Cloud BigQuery Environment:**
@@ -197,6 +187,16 @@ FROM Cleaned_Cohort
 GROUP BY OUTCOME
 ORDER BY active_tb_cases DESC, total_subjects DESC;
 ```
+
+---
+
+## 📊 Exploratory Visualizations
+
+### 1. BMI Category Distribution
+![BMI Distribution](visuals/bmi_distribution.png)
+
+### 2. Age vs. IFN-Gamma Response Delta by BMI Category
+![Age vs IFN Delta](visuals/age_vs_ifn_gamma_delta.png)
 
 ---
 
